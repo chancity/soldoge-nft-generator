@@ -23,7 +23,7 @@ namespace soldoge_nft_generator
                 mergedPartTypes.UnionWith(_partMap[solDogePartType]);
             }
 
-            var weights = mergedPartTypes.Select(background => background.Rarity);
+            var weights = mergedPartTypes.Select(solDogePart => solDogePart.Rarity);
             return Random.Choice(mergedPartTypes, weights);
         }
     }
