@@ -17,14 +17,13 @@ namespace soldoge_nft_generator
             var createdSolDoges = new HashSet<SolDoge>();
           
             var i = 0;
-
             while (i < solDogesToCreate)
             {
                 if (createdSolDoges.Add(new SolDoge() {
                     partPicker.Pick(SolDogePartType.Background),
                     partPicker.Pick(SolDogePartType.Base),
                     partPicker.Pick(SolDogePartType.Backpack),
-                    partPicker.Pick(SolDogePartType.Clothes,SolDogePartType.Collar),
+                    partPicker.Pick(SolDogePartType.Clothes, SolDogePartType.Collar),
                     partPicker.Pick(SolDogePartType.Eyes, SolDogePartType.Eyewear),
                     partPicker.Pick(SolDogePartType.Mouth),
                     partPicker.Pick(SolDogePartType.Headwear, SolDogePartType.Hair),
