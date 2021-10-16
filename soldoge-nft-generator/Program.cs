@@ -16,9 +16,10 @@ namespace soldoge_nft_generator
             
             var partMap = PartMap.FromFileSystem(partDirectory);
             var partPicker = new PartPicker(partMap);
-            var createdSolDoges = new HashSet<SolDoge>();
+            
           
             var i = 0;
+            var createdSolDoges = new HashSet<SolDoge>();
             while (i < solDogesToCreate)
             {
                 if (createdSolDoges.Add(new SolDoge() {
