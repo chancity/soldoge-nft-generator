@@ -8,9 +8,11 @@ namespace soldoge_nft_generator
         private static void Main(string[] args)
         {
             const string partDirectory = "PNG/";
+            const string saveDirectory = "assets/";
+            const string collectionName = "SolDoge";
             const int solDogesToCreate = 20;
             
-            Directory.CreateDirectory("assets");
+            Directory.CreateDirectory(saveDirectory);
             
             var partMap = PartMap.FromFileSystem(partDirectory);
             var partPicker = new PartPicker(partMap);
@@ -35,7 +37,7 @@ namespace soldoge_nft_generator
             var namePostFix = 0;
             foreach (var solDoge in createdSolDoges)
             {
-                solDoge.SaveAsImage($"assets/SolDoge #{namePostFix}.bmp");
+                solDoge.SaveAsImage($"{saveDirectory}/{collectionName} #{namePostFix}.bmp");
                 namePostFix++;
             }
         }
