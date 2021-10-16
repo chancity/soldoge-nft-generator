@@ -3,37 +3,38 @@ using System.IO;
 
 namespace soldoge_nft_generator
 {
-    class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
+            const string partDirectory = "PNG/";
+            const int solDogesToCreate = 20;
+            
             Directory.CreateDirectory("assets");
-            var partDirectory = "PNG/";
+            
             var partMap = PartMap.FromFileSystem(partDirectory);
             var partPicker = new PartPicker(partMap);
-
-            var createSolDoges = new HashSet<SolDoge>();
-            var solDogesToCreate = 20;
+            var createdSolDoges = new HashSet<SolDoge>();
+          
             var i = 0;
 
             while (i < solDogesToCreate)
             {
-                if (createSolDoges.Add(new SolDoge() {
+                if (createdSolDoges.Add(new SolDoge() {
                     partPicker.Pick(SolDogePartType.Background),
                     partPicker.Pick(SolDogePartType.Base),
                     partPicker.Pick(SolDogePartType.Backpack),
-                    partPicker.Pick(SolDogePartType.Clothes),
-                    partPicker.Pick(SolDogePartType.Collar),
+                    partPicker.Pick(SolDogePartType.Clothes,SolDogePartType.Collar),
                     partPicker.Pick(SolDogePartType.Eyes, SolDogePartType.Eyewear),
-                    partPicker.Pick(SolDogePartType.Headwear, SolDogePartType.Hair),
                     partPicker.Pick(SolDogePartType.Mouth),
+                    partPicker.Pick(SolDogePartType.Headwear, SolDogePartType.Hair),
                 })) {
                     i++;
                 }
             }
             
             var namePostFix = 0;
-            foreach (var solDoge in createSolDoges)
+            foreach (var solDoge in createdSolDoges)
             {
                 solDoge.SaveAsImage($"assets/SolDoge #{namePostFix}.bmp");
                 namePostFix++;

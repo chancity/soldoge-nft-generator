@@ -9,39 +9,25 @@ namespace soldoge_nft_generator
     {
         private static Bitmap Merge(IEnumerable<Image> images)
         {
-            var enumerable = images as IList ?? images.ToList();
-            var width = 1440;
-            var height = 1440;
-        
-            // merge images
+            const int width = 1440;
+            const int height = 1440;
             var bitmap = new Bitmap(width, height);
-            using (var g = Graphics.FromImage(bitmap))
+            using var g = Graphics.FromImage(bitmap);
+            var enumerable = images as IList ?? images.ToList();
+            foreach (Image image in enumerable) 
             {
-                foreach (Image image in enumerable) 
-                {
-                    g.DrawImage(image, 0, 0);
-                }
+                g.DrawImage(image, 0, 0);
             }
             return bitmap;
         }
         
         public bool SaveAsImage(string filePath)
         {
-            if (Count > 0)
-            {
-                var images = new List<Image>();
-                foreach (var solDogePart in this)
-                {
-                    images.Add(Image.FromFile(solDogePart.AssetPath));
-                }
-
-                var mergedBitmap = Merge(images);
-                mergedBitmap.Save(filePath);
-
-                return true;
-            }
-
-            return false;
+            if (Count <= 0) return false;
+            var images = this.Select(solDogePart => Image.FromFile(solDogePart.AssetPath)).ToList();
+            var mergedBitmap = Merge(images);
+            mergedBitmap.Save(filePath);
+            return true;
         }
         
         

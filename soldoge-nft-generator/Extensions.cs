@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace soldoge_nft_generator
 {
-    static class Extensions
+    internal static class Extensions
     {
         public static T Choice<T>(this Random rnd, IEnumerable<T> choices, IEnumerable<int> weights) where T : class
         {

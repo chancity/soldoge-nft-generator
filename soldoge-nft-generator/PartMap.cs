@@ -9,13 +9,12 @@ namespace soldoge_nft_generator
     {
         private static string UpperCaseFirstLetter(string input)
         {
-            if (input.Length == 0)
-                return input;
-
-            if (input.Length == 1)
-                return char.ToUpper(input[0]).ToString();
-
-            return char.ToUpper(input[0]) + input.Substring(1);
+            return input.Length switch
+            {
+                0 => input,
+                1 => char.ToUpper(input[0]).ToString(),
+                _ => char.ToUpper(input[0]) + input[1..]
+            };
         }
         
         public static Dictionary<SolDogePartType, HashSet<SolDogePart>> FromFileSystem(string partDirectory)

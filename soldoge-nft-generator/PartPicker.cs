@@ -6,9 +6,9 @@ namespace soldoge_nft_generator
 {
     public class PartPicker
     {
-        private static Random _random = new Random();
+        private static readonly Random Random = new Random();
 
-        private Dictionary<SolDogePartType, HashSet<SolDogePart>> _partMap;
+        private readonly Dictionary<SolDogePartType, HashSet<SolDogePart>> _partMap;
 
         public PartPicker(Dictionary<SolDogePartType, HashSet<SolDogePart>> partMap)
         {
@@ -24,7 +24,7 @@ namespace soldoge_nft_generator
             }
 
             var weights = mergedPartTypes.Select(background => background.Rarity);
-            return _random.Choice(mergedPartTypes, weights);
+            return Random.Choice(mergedPartTypes, weights);
         }
     }
 }
