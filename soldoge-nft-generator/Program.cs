@@ -13,16 +13,15 @@ namespace soldoge_nft_generator
             const int solDogesToCreate = 20;
             
             Directory.CreateDirectory(saveDirectory);
+
+            Dictionary<SolDogePartType, HashSet<SolDogePart>> partMap = PartMap.FromFileSystem(partDirectory);
+            PartPicker partPicker = new(partMap);
             
-            var partMap = PartMap.FromFileSystem(partDirectory);
-            var partPicker = new PartPicker(partMap);
-            
-          
             var i = 0;
             var createdSolDoges = new HashSet<SolDoge>();
             while (i < solDogesToCreate)
             {
-                if (createdSolDoges.Add(new SolDoge() {
+                if (createdSolDoges.Add(new SolDoge {
                     partPicker.Pick(SolDogePartType.Background),
                     partPicker.Pick(SolDogePartType.Base),
                     partPicker.Pick(SolDogePartType.Backpack),
@@ -36,7 +35,7 @@ namespace soldoge_nft_generator
             }
             
             var namePostFix = 0;
-            foreach (var solDoge in createdSolDoges)
+            foreach (SolDoge solDoge in createdSolDoges)
             {
                 solDoge.SaveAsImage($"{saveDirectory}/{collectionName} #{namePostFix}.bmp");
                 namePostFix++;

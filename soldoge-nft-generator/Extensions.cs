@@ -7,16 +7,16 @@ namespace soldoge_nft_generator
     {
         public static T Choice<T>(this Random rnd, IEnumerable<T> choices, IEnumerable<int> weights) where T : class
         {
-            var cumulativeWeight = new List<int>();
-            var last = 0;
-            foreach (var current in weights)
+            List<int> cumulativeWeight = new();
+            int last = 0;
+            foreach (int current in weights)
             {
                 last += current;
                 cumulativeWeight.Add(last);
             }
-            var choice = rnd.Next(last);
-            var i = 0;
-            foreach (var cur in choices)
+            int choice = rnd.Next(last);
+            int i = 0;
+            foreach (T cur in choices)
             {
                 if (choice < cumulativeWeight[i])
                 {

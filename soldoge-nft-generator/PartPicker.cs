@@ -18,12 +18,12 @@ namespace soldoge_nft_generator
         public SolDogePart Pick(params SolDogePartType[] partTypes)
         {
             var mergedPartTypes = new HashSet<SolDogePart>();
-            foreach (var solDogePartType in partTypes)
+            foreach (SolDogePartType solDogePartType in partTypes)
             {
                 mergedPartTypes.UnionWith(_partMap[solDogePartType]);
             }
 
-            var weights = mergedPartTypes.Select(solDogePart => solDogePart.Rarity);
+            IEnumerable<int> weights = mergedPartTypes.Select(solDogePart => solDogePart.Rarity);
             return Random.Choice(mergedPartTypes, weights);
         }
     }
